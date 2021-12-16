@@ -1,70 +1,12 @@
-# Getting Started with Create React App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+- При чтении данных я использовал паттерн "Адаптер", для того чтобы перестроить объект для более удобного дальнейшего использования.
 
-## Available Scripts
+- При повторном чтении файла data.json (Во время интервального вызова), происходит перезапись старой версии, в которую могут быть внесены изменения самим пользователем (Например при выборе товара, его количество уменьшается, что сохраняется в сторе). Поэтому при недостатке информации в ТЗ о том что дальше делать с данными, полученными при повторном чтении файла data.js я вынужден был отменить перезапись исходного файла и оставить всё в изначальном состоянии. Можно было бы предположить, что необходимо произвести сравнение версий и внести изменение в актуальное состоянии в соответсвии с новыми данными, но т.к в ТЗ этого нет, то я не стал ничего делать. 
 
-In the project directory, you can run:
+- Было решено разделить хранилище на три части. В одной храняться данные для вывода и их сопоставления из файла names.json, в другой храниться данные о корзине и общей сумме товаров и в третьей храниться текущий курс USD/RUB. 
 
-### `npm start`
+-  При реализации функции подсветки полей необходимо было пропустить запуск этой функции при монтировании компонента, в противном случае поле подсвечивалось сразу при запуске приложения. Для этого был создан кастомный хук "useComponentDidMount". Его цель - проверка на первичную отрисовку.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+- Данные в корзине и таблице связаны. При изменении количества товаров для покупке в корзине, меняется и количество оставшихся товаров в таблице. При условии, когда выбрано максимальное количество товара в корзине, товар в таблице пропадает из списка.
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
-
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+- При изменении курса валют, данные в корзине так же изменяются в соответствии с курсом.
