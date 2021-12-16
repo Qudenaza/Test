@@ -1,0 +1,85 @@
+.goods {
+  display: grid;
+  align-items: flex-start;
+  grid-auto-columns: 1fr;
+  gap: 10px 10px;
+  grid-template-areas:
+    '. .'
+    '. .';
+
+  &__list {
+    border: 1px solid #e3e3e5;
+
+    &--expanded {
+      .goods__wrapper {
+        height: auto;
+      }
+
+      .goods__title::after {
+        transform: rotate(180deg) translateY(50%);
+      }
+    }
+  }
+
+  &__title {
+    position: relative;
+    padding: 10px;
+
+    color: #dbe1fa;
+
+    cursor: pointer;
+
+    background-color: #7f95da;
+
+    &::after {
+      position: absolute;
+      content: '';
+      right: 20px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 16px;
+      height: 16px;
+
+      background: url('/assets/images/icon-arrow.png') no-repeat;
+      background-size: cover;
+    }
+  }
+
+  &__wrapper {
+    height: 0;
+
+    overflow: hidden;
+
+    transition: all 0.3s ease;
+  }
+
+  &__item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+
+    cursor: pointer;
+
+    transition: background-color 0.3s ease;
+
+    &:hover {
+      background-color: #f5c400;
+    }
+
+    &:not(:last-child) {
+      border-bottom: 1px solid #e3e3e5;
+    }
+  }
+
+  &__count {
+    margin-left: 5px;
+  }
+
+  &__price {
+    margin-left: 60px;
+    padding: 10px 15px;
+
+    background-color: #ddd8d8;
+  }
+}
